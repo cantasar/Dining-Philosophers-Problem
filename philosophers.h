@@ -3,6 +3,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <pthread.h>
 
 typedef unsigned long long	t_time;
@@ -18,18 +19,19 @@ typedef struct s_philo
 	int		eat_time;
 
 	pthread_t	thread;
-	pthread_mutex_t	left_fork;
-	pthread_mutex_t	right_fork;
-	//pthread_mutex_t	dead;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*dead;
 
 }	t_philo;
 
 //init 
 int 	check_args(int argc, char **argv);
 void	init_args(int argc, char **argv, t_philo *philo);
-void	init_mutex(t_philo *philo, char **argv);
+void	init_mutex(t_philo *philo, char **argv, pthread_mutex_t *forks, pthread_mutex_t *dead);
+
 
 //utils
-long	ft_atol(const char *str);
+long	ft_atol(char *str);
 
 #endif

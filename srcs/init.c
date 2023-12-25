@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/17 14:22:33 by ctasar            #+#    #+#             */
+/*   Updated: 2023/12/24 18:46:13 by ctasar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../philosophers.h"
 
 int check_args(int argc, char **argv)
@@ -26,10 +38,26 @@ int check_args(int argc, char **argv)
 	return (1);
 }
 
-void	init_mutex(t_philo *philo, char **argv)
+void	init_mutex(t_philo *philo, char **argv, pthread_mutex_t *forks, pthread_mutex_t *dead)
 {
-	pthread_mutex_init(&philo->left_fork, NULL);
-	pthread_mutex_init(&philo->right_fork, NULL);
+	int	i;
+
+	i = 0;
+	while (i < philo->number_philo)
+	{
+		philo[i].left_fork = &forks[i];
+		philo[i].right_fork = &forks[(i + 1) % philo->number_philo];
+		i++;
+	}
+	i = 0;
+	while (i < philo->number_philo)
+	{
+		pthread_mutex_init(philo[i].left_fork, NULL);
+		pthread_mutex_init(philo[i].right_fork, NULL);
+		philo[i].dead = dead;
+		i++;
+	}
+	pthread_mutex_init(philo->dead, NULL);
 }
 
 void	init_args(int argc, char **argv, t_philo *philo)
