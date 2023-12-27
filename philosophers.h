@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/25 13:39:45 by ctasar            #+#    #+#             */
+/*   Updated: 2023/12/25 21:18:40 by ctasar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
@@ -5,33 +17,40 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef unsigned long long	t_time;
 
 typedef struct s_philo
 {
-	int 	id;
+	int				index;
+	int				number_philo;
+	t_time			time_to_die;
+	t_time			time_to_sleep;
+	t_time			time_to_eat;
+	int				must_eat;
+	t_time			start_time;
+	t_time			last_eat_time;
 
-	int		number_philo;
-	t_time	time_to_die;
-	t_time	time_to_sleep;
-	t_time	time_to_eat;
-	int		eat_time;
-
-	pthread_t	thread;
+	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	pthread_mutex_t	*dead;
+	pthread_mutex_t	*lock;
 
 }	t_philo;
 
 //init 
-int 	check_args(int argc, char **argv);
+int		check_args(int argc, char **argv);
 void	init_args(int argc, char **argv, t_philo *philo);
-void	init_mutex(t_philo *philo, char **argv, pthread_mutex_t *forks, pthread_mutex_t *dead);
-
+void	init_forks(t_philo *philo, pthread_mutex_t *forks, \
+		pthread_mutex_t *lock);
+void	create_threads(t_philo *philo);
 
 //utils
-long	ft_atol(char *str);
+int		ft_atoi(char *str);
+t_time	get_time(void);
+
+//life
+void	*lifecycle(void *arg_philo);
 
 #endif

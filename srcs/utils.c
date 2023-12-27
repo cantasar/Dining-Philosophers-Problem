@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 14:22:36 by ctasar            #+#    #+#             */
-/*   Updated: 2023/12/17 14:22:37 by ctasar           ###   ########.fr       */
+/*   Created: 2023/12/25 11:36:57 by ctasar            #+#    #+#             */
+/*   Updated: 2023/12/25 17:25:45 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
 
-long	ft_atol(char *str)
+int	ft_atoi(char *str)
 {
-	int				i;
-	int				neg;
-	long			num;
+	int	i;
+	int	neg;
+	int	num;
 
 	num = 0;
 	neg = 1;
@@ -35,4 +35,14 @@ long	ft_atol(char *str)
 		i++;
 	}
 	return (num * neg);
+}
+
+t_time	get_time(void)
+{
+	struct timeval		tv;
+	unsigned long long	time;
+
+	gettimeofday(&tv, NULL);
+	time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (time);
 }
