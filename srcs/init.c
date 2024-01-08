@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:22:33 by ctasar            #+#    #+#             */
-/*   Updated: 2023/12/25 21:30:10 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/01/03 19:45:13 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void	init_args(int argc, char **argv, t_philo *philo)
 	}
 }
 
-void	init_forks(t_philo *philo, pthread_mutex_t *forks, \
-		pthread_mutex_t *lock)
+void	init_forks(t_philo *philo, pthread_mutex_t *forks)
 {
 	int	i;
 
@@ -71,7 +70,6 @@ void	init_forks(t_philo *philo, pthread_mutex_t *forks, \
 	{
 		philo[i].left_fork = &forks[i];
 		philo[i].right_fork = &forks[(i + 1) % philo->number_philo];
-		philo[i].lock = lock;
 		i++;
 	}
 	i = 0;
@@ -79,10 +77,9 @@ void	init_forks(t_philo *philo, pthread_mutex_t *forks, \
 	{
 		pthread_mutex_init(philo[i].left_fork, NULL);
 		pthread_mutex_init(philo[i].right_fork, NULL);
-		pthread_mutex_init(philo[i].lock, NULL);
+		pthread_mutex_init(&philo[i].lock, NULL);
 		i++;
 	}
-	(void) lock;
 }
 
 void	create_threads(t_philo *philo)

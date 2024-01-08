@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:22:15 by ctasar            #+#    #+#             */
-/*   Updated: 2023/12/27 10:11:43 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:22:55 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	*lock;
 
 	if (check_args(argc, argv) != 1)
 	{
@@ -25,12 +24,11 @@ int	main(int argc, char **argv)
 		time_to_sleep must_eat\n");
 		return (1);
 	}
-	philo = malloc(sizeof(*philo) * ft_atoi(argv[1]));
+	philo = malloc(sizeof(t_philo) * ft_atoi(argv[1]));
 	forks = malloc(sizeof(pthread_mutex_t) * ft_atoi(argv[1]));
-	lock = malloc(sizeof(pthread_mutex_t));
 	init_args(argc, argv, philo);
-	init_forks(philo, forks, lock);
+	init_forks(philo, forks);
 	create_threads(philo);
-	printf("-\n");
+	printf("Main closed\n");
 	return (0);
 }
