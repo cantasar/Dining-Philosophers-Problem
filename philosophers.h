@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 13:39:45 by ctasar            #+#    #+#             */
-/*   Updated: 2024/02/06 14:09:54 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/07 18:51:05 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*lock;
 
-
 }	t_philo;
 
 //init 
@@ -60,6 +59,6 @@ void	ft_sleep(int wait_time, t_philo	*philo);
 void	*lifecycle(void *arg_philo);
 
 //check
-int	ft_philo_check(t_philo *philo);
+int		ft_philo_check(t_philo *philo);
 
 #endif

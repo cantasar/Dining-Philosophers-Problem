@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:22:33 by ctasar            #+#    #+#             */
-/*   Updated: 2024/02/06 17:54:35 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/07 18:31:03 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	init_forks(t_philo *philo, pthread_mutex_t *forks, \
 		philo[i].lock = lock;
 		i++;
 	}
-
 }
 
 void	create_threads(t_philo *philo)
@@ -95,8 +94,13 @@ void	create_threads(t_philo *philo)
 	}
 	while (1)
 	{
-		
+		if (ft_philo_check(philo))
+			break ;
 	}
-
-
+	i = 0;
+	while (i < philo->number_philo)
+	{
+		pthread_join(philo[i].thread, NULL);
+		i++;
+	}
 }

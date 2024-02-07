@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 11:36:57 by ctasar            #+#    #+#             */
-/*   Updated: 2024/02/06 16:50:11 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/07 19:03:53 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_time	get_time(void)
 
 void	ft_sleep(int wait_time, t_philo	*philo)
 {
-	t_time time;
+	t_time	time;
 
 	time = get_time();
 	while (get_time() - time < (t_time)wait_time)
@@ -58,5 +58,5 @@ void	ft_sleep(int wait_time, t_philo	*philo)
 			return ;
 		usleep(100);
 	}
-	
+	return ;
 }

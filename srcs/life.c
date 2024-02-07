@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 20:59:42 by ctasar            #+#    #+#             */
-/*   Updated: 2024/02/07 00:23:30 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/07 20:23:35 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	eat(t_philo	*philo)
 {
-	if (ft_philo_check(philo))
-		return;
 	pthread_mutex_lock(philo->left_fork);
 	pthread_mutex_lock(philo->right_fork);
 	printf("%llu %d has taken a fork\n", get_time() - philo->start_time, \
@@ -29,15 +27,16 @@ void	eat(t_philo	*philo)
 	philo->num_eaten++;
 	pthread_mutex_unlock(philo->lock);
 	ft_sleep(200, philo);
-	if (ft_philo_check(philo))
-		return;
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
+	if (ft_philo_check(philo))
+		return ;
 	printf("%llu %d is sleeping\n", get_time() - philo->start_time, \
 			philo->index + 1);
 	ft_sleep(philo->time_to_sleep, philo);
-	if (!ft_philo_check(philo))
-		printf("%llu %d is thinking\n", get_time() - philo->start_time, \
+	if (ft_philo_check(philo))
+		return ;
+	printf("%llu %d is thinking\n", get_time() - philo->start_time, \
 				philo->index + 1);
 }
 
@@ -46,12 +45,24 @@ void	*lifecycle(void *arg_philo)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg_philo;
-	int i = 0;
-	while (i < 20)
+	if (philo->number_philo == 1 && !ft_philo_check(philo))
 	{
-		eat(philo);
-		i++;
+		pthread_mutex_lock(philo->left_fork);
+		printf("%llu %d has taken a fork\n", get_time() - philo->start_time, \
+				philo->index + 1);
+		while (!ft_philo_check(philo))
+		{
+		}
+		pthread_mutex_unlock(philo->left_fork);
 	}
-
+	else
+	{
+		while (1)
+		{
+			if (ft_philo_check(philo))
+				return (NULL);
+			eat(philo);
+		}
+	}
 	return (NULL);
 }
