@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:22:33 by ctasar            #+#    #+#             */
-/*   Updated: 2024/01/03 19:45:13 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/06 17:54:35 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ int	check_args(int argc, char **argv)
 void	init_args(int argc, char **argv, t_philo *philo)
 {
 	int	i;
+	int	dead;
 
 	i = 0;
+	dead = 0;
 	while (i < ft_atoi(argv[1]))
 	{
 		philo[i].index = i;
@@ -57,11 +59,13 @@ void	init_args(int argc, char **argv, t_philo *philo)
 			philo[i].must_eat = -1;
 		philo[i].start_time = get_time();
 		philo[i].last_eat_time = get_time();
+		philo[i].is_dead = &dead;
 		i++;
 	}
 }
 
-void	init_forks(t_philo *philo, pthread_mutex_t *forks)
+void	init_forks(t_philo *philo, pthread_mutex_t *forks, \
+					pthread_mutex_t *lock)
 {
 	int	i;
 
@@ -70,16 +74,12 @@ void	init_forks(t_philo *philo, pthread_mutex_t *forks)
 	{
 		philo[i].left_fork = &forks[i];
 		philo[i].right_fork = &forks[(i + 1) % philo->number_philo];
-		i++;
-	}
-	i = 0;
-	while (i < philo->number_philo)
-	{
 		pthread_mutex_init(philo[i].left_fork, NULL);
 		pthread_mutex_init(philo[i].right_fork, NULL);
-		pthread_mutex_init(&philo[i].lock, NULL);
+		philo[i].lock = lock;
 		i++;
 	}
+
 }
 
 void	create_threads(t_philo *philo)
@@ -93,5 +93,10 @@ void	create_threads(t_philo *philo)
 		i++;
 		usleep(100);
 	}
+	while (1)
+	{
+		
+	}
+
 
 }

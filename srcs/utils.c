@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 11:36:57 by ctasar            #+#    #+#             */
-/*   Updated: 2024/01/03 19:44:43 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:50:11 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,18 @@ t_time	get_time(void)
 	gettimeofday(&tv, NULL);
 	time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	return (time);
+}
+
+void	ft_sleep(int wait_time, t_philo	*philo)
+{
+	t_time time;
+
+	time = get_time();
+	while (get_time() - time < (t_time)wait_time)
+	{
+		if (ft_philo_check(philo))
+			return ;
+		usleep(100);
+	}
+	
 }
