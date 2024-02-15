@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:22:33 by ctasar            #+#    #+#             */
-/*   Updated: 2024/02/07 18:31:03 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/15 15:43:30 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ int	check_args(int argc, char **argv)
 void	init_args(int argc, char **argv, t_philo *philo)
 {
 	int	i;
-	int	dead;
 
 	i = 0;
-	dead = 0;
 	while (i < ft_atoi(argv[1]))
 	{
 		philo[i].index = i;
@@ -59,7 +57,6 @@ void	init_args(int argc, char **argv, t_philo *philo)
 			philo[i].must_eat = -1;
 		philo[i].start_time = get_time();
 		philo[i].last_eat_time = get_time();
-		philo[i].is_dead = &dead;
 		i++;
 	}
 }
@@ -94,13 +91,10 @@ void	create_threads(t_philo *philo)
 	}
 	while (1)
 	{
-		if (ft_philo_check(philo))
+		is_dead(philo);
+		if (dead_check(philo) == 1)
 			break ;
-	}
-	i = 0;
-	while (i < philo->number_philo)
-	{
-		pthread_join(philo[i].thread, NULL);
-		i++;
+		else if (philo->must_eat != -1 && must_eat_check(philo) == 1)
+			break ;
 	}
 }

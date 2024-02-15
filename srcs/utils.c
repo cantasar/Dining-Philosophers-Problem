@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 11:36:57 by ctasar            #+#    #+#             */
-/*   Updated: 2024/02/07 19:03:53 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/15 15:43:49 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,25 @@ void	ft_sleep(int wait_time, t_philo	*philo)
 	t_time	time;
 
 	time = get_time();
+	(void)philo;
+	pthread_mutex_unlock(philo->lock);
 	while (get_time() - time < (t_time)wait_time)
 	{
-		if (ft_philo_check(philo))
-			return ;
 		usleep(100);
 	}
 	return ;
+}
+
+void	must_eat_count(t_philo *philo)
+{
+	if (philo->must_eat != -1 && philo->must_eat > 0)
+		philo->must_eat--;
+}
+
+void	is_dead(t_philo *philo)
+{
+	pthread_mutex_lock(philo->lock);
+	if (philo->time_to_die < (get_time() - philo->last_eat_time))
+		philo->is_dead = 1;
+	pthread_mutex_unlock(philo->lock);
 }
