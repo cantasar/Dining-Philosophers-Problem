@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:22:15 by ctasar            #+#    #+#             */
-/*   Updated: 2024/02/15 15:27:20 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/23 18:20:46 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 	init_args(argc, argv, philo);
 	init_forks(philo, forks, &lock);
 	create_threads(philo);
+	free_all(philo, forks);
 	printf("Main closed\n");
 	return (0);
 }

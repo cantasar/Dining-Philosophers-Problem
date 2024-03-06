@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 20:59:42 by ctasar            #+#    #+#             */
-/*   Updated: 2024/02/15 15:45:10 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/17 21:38:35 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	*lifecycle(void *arg_philo)
 		pthread_mutex_lock(philo->left_fork);
 		printf("%llu %d has taken a fork\n", get_time() - philo->start_time, \
 				philo->index + 1);
-		pthread_mutex_unlock(philo->left_fork);
 	}
 	else
 	{

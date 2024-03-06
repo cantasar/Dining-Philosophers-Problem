@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 11:36:57 by ctasar            #+#    #+#             */
-/*   Updated: 2024/02/15 15:43:49 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/22 12:14:05 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_sleep(int wait_time, t_philo	*philo)
 	pthread_mutex_unlock(philo->lock);
 	while (get_time() - time < (t_time)wait_time)
 	{
-		usleep(100);
+		usleep(50);
 	}
 	return ;
 }

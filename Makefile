@@ -18,8 +18,6 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) -o $(NAME)
 
-#-fsanitize=thread
-
 clean:
 	$(RM) $(OBJS)
 

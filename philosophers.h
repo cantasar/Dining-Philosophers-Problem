@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 13:39:45 by ctasar            #+#    #+#             */
-/*   Updated: 2024/02/15 15:30:04 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/02/23 18:20:42 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_philo
 	t_time			time_to_eat;
 	int				must_eat;
 
-	//int				num_eaten;
 	int				is_dead;
 
 	t_time			start_time;
@@ -49,6 +48,7 @@ void	init_args(int argc, char **argv, t_philo *philo);
 void	init_forks(t_philo *philo, pthread_mutex_t *forks, \
 					pthread_mutex_t *lock);
 void	create_threads(t_philo *philo);
+void	free_all(t_philo *philo, pthread_mutex_t *forks);
 
 //utils
 int		ft_atoi(char *str);
