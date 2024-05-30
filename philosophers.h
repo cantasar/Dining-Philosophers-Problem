@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 13:39:45 by ctasar            #+#    #+#             */
-/*   Updated: 2024/02/23 18:20:42 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/05/21 17:07:19 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void	is_dead(t_philo *philo);
 void	*lifecycle(void *arg_philo);
 
 //check
-int	must_eat_check(t_philo *philo);
-int	dead_check(t_philo *philo);
-
+int		must_eat_check(t_philo *philo);
+int		dead_check(t_philo *philo);
 
 #endif

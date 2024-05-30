@@ -6,7 +6,7 @@
 /*   By: ctasar <ctasar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:22:15 by ctasar            #+#    #+#             */
-/*   Updated: 2024/03/19 23:57:10 by ctasar           ###   ########.fr       */
+/*   Updated: 2024/05/21 17:16:17 by ctasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main(int argc, char **argv)
 	if (check_args(argc, argv) != 1)
 	{
 		printf("Invalid Argumans!\n");
-		printf("./philo number_of_philo time_to_die time_to_eat \
-		time_to_sleep must_eat\n");
+		printf("./philo number_of_philo time_to_die time_to_eat ");
+		printf("time_to_sleep must_eat\n");
 		return (1);
 	}
 	philo = malloc(sizeof(t_philo) * ft_atoi(argv[1]));
